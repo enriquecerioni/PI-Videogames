@@ -22,6 +22,11 @@ export default function Home() {
     const indexLastVideogame = currentPage * VideogamesPerPage; // inicialmente será igual a 15
     const indexFirstVideogame = indexLastVideogame - VideogamesPerPage;// inicialmente será 0
     const currentVideogames = allGames.slice(indexFirstVideogame, indexLastVideogame);
+    const videogamesShow = currentVideogames.map(g => 
+                <Link to={"/home/" + g.id}>
+                    <Card name={g.name} image={g.image} genre={g.genre} id={g.id} key={g.id}/>
+                </Link>
+    )
     // Loader
     const [loading, setLoading] = useState(true);
 
@@ -118,15 +123,10 @@ export default function Home() {
                     loading ? (
                         <Loader />
                     ) : (
-                    currentVideogames.map(g => {
-                        return (
-                            <div className={styles.cards}>
-                                <Link to={"/home/" + g.id}>
-                                    <Card name={g.name} image={g.image} genre={g.genre} id={g.id} key={g.id}/>
-                                </Link>
-                            </div>
-                        );
-                    })
+                        <div className={styles.cards}>
+                            {videogamesShow}
+                        </div>
+                    
                     )
                 }
             </div>
