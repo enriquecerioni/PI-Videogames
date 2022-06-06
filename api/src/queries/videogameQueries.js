@@ -103,9 +103,9 @@ exports.getVideogameDetailAPI = async(id) => {
             name: detail.data.name,
             genres: detail.data.genres,
             description: detail.data.description,
-            releaseDate: detail.data.realeased,
+            releaseDate: detail.data.released,
             rating: detail.data.rating,
-            platforms: detail.plaftorms
+            platforms: detail.data.platforms.map(p => p.platform.name)
     }
     } catch (error) {
         return `El ID: ${id} no existe`;

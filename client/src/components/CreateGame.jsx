@@ -3,10 +3,23 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { getGenres, postVideogame } from "../redux/actions";
 
+function validateForm(input){
+        let errors = {};
+        if(!input.name){
+            errors.name = "Ingresar un nombre para el Juego."
+        }
+
+        return errors;
+}
+
+
 export default function CreateGame(){
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const genres = useSelector((state) => state.genres);
+
+    // Form Validate
+    const [errors, setErrors] = useState({})
 
     const[input, setInput] = useState({
         name:"",
@@ -22,6 +35,10 @@ export default function CreateGame(){
             ...input,
             [e.target.name]: e.target.value
         })
+        setErrors(validateForm({
+            ...input,
+            [e.target.name]: e.target.value
+        }));
 
         console.log(input)
     }
@@ -46,6 +63,13 @@ export default function CreateGame(){
         setInput({
             ...input,
             genres: []
+        })
+    }
+
+    function handleDelete(e){
+        setInput({
+            ...input,
+            genres: input.genres.filter(genre => genre !== e)
         })
     }
 
@@ -76,6 +100,11 @@ export default function CreateGame(){
                 <div>
                     <label>Name:</label>
                     <input type="text" value={input.name} name="name" onChange={e => handleChange(e)}/>
+                    {
+                        errors.name && (
+                            <p>{errors.name}</p>
+                        )
+                    }
                 </div>
                 <div>
                     <label>Description:</label>
@@ -117,11 +146,20 @@ export default function CreateGame(){
                         }
                     </select>
                     <button type="button" onClick={e => handleEmptySelect(e)}>Empty Genres</button>
-                    <ul><li>{input.genres.map(e => e + " ,")}</li></ul>
+                    
                 </div>
+                {
+                input.genres.map(g => 
+                            <div>
+                                <p>{g}</p>
+                                <button type="button" onClick={() => handleDelete(g)}>x</button>
+                            </div>
+                        )
+                }
 
                 <button type="submit">CREAR</button>
             </form>
+            
         </div>
     )
 }

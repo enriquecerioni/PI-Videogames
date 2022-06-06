@@ -7,6 +7,7 @@ export const FILTER_GAMES_CREATED = "FILTER_GAMES_CREATED";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_RATING = "ORDER_BY_RATING";
 export const GET_VIDEOGAME_BY_NAME = "GET_VIDEOGAME_BY_NAME";
+export const GET_VIDEOGAME_BY_ID = "GET_VIDEOGAME_BY_ID";
 
 export function getVideogames(){
     return async function (dispatch){
@@ -47,6 +48,20 @@ export function postVideogame(payload){
     return async function (dispatch){
         const videogame = await axios.post("http://localhost:3001/videogames", payload);
         return videogame;
+    }
+}
+
+export function getVideogameDetail(id){
+    return async function(dispatch){
+        try {
+            const videogame = await axios.get("http://localhost:3001/videogames/" + id);
+            return dispatch({
+                type: GET_VIDEOGAME_BY_ID,
+                payload: videogame.data
+            })
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 

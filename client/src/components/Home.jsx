@@ -7,6 +7,7 @@ import Card from "./Card";
 import Paginate from "./Paginate";
 import SearchBar from "./SearchBar";
 import Loader from "./Loader";
+import Detail from "./Detail";
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -121,7 +122,7 @@ export default function Home() {
                         return (
                             <Fragment>
                                 <Link to={"/home/" + g.id}>
-                                    <Card name={g.name} image={g.image} genres={g.genres} key={g.id} />
+                                    <Card name={g.name} image={g.image} genre={g.genre} id={g.id} key={g.id} />
                                 </Link>
                             </Fragment>
                         );
