@@ -1,0 +1,18 @@
+.card{
+    width: 20rem;
+    height: 20rem;
+    background-color: antiquewhite;
+    margin-bottom: -30xp;
+    margin: auto;
+    border-radius: 1rem;
+    border: 1px solid black;
+    box-shadow:0.50rem 0.50rem gray;
+    height: fit-content;
+    margin-bottom: 3rem;
+}
+
+.image{
+    padding-top: 2rem;
+    width: 15rem;
+    height: 15rem;
+}
