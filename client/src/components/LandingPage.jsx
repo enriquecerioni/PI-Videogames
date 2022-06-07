@@ -6,7 +6,7 @@ export default function LandingPage(){
         <div>
             <h1>Bienvenidos a Henry VideoGames</h1>
             <Link to="/home">
-                <button>Ingresar</button>
+                <button class="button">Ingresar</button>
             </Link>
         </div>
     )
